@@ -1,0 +1,26 @@
+--cpu Cortex-M3
+"tansmit\startup_stm32f103xb.o"
+"tansmit\main.o"
+"tansmit\gpio.o"
+"tansmit\usart.o"
+"tansmit\stm32f1xx_it.o"
+"tansmit\stm32f1xx_hal_msp.o"
+"tansmit\stm32f1xx_hal_gpio_ex.o"
+"tansmit\stm32f1xx_hal_tim.o"
+"tansmit\stm32f1xx_hal_tim_ex.o"
+"tansmit\stm32f1xx_hal_uart.o"
+"tansmit\stm32f1xx_hal.o"
+"tansmit\stm32f1xx_hal_rcc.o"
+"tansmit\stm32f1xx_hal_rcc_ex.o"
+"tansmit\stm32f1xx_hal_gpio.o"
+"tansmit\stm32f1xx_hal_dma.o"
+"tansmit\stm32f1xx_hal_cortex.o"
+"tansmit\stm32f1xx_hal_pwr.o"
+"tansmit\stm32f1xx_hal_flash.o"
+"tansmit\stm32f1xx_hal_flash_ex.o"
+"tansmit\stm32f1xx_hal_exti.o"
+"tansmit\system_stm32f1xx.o"
+--strict --scatter "tansmit\tansmit.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "tansmit.map" -o tansmit\tansmit.axf
