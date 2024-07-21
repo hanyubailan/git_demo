@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,8 +45,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t Rxdata[1]="1";
-uint8_t Txdata[5]="nihao";
+//uint8_t Rxdata[1]="1";
+uint8_t Rx[4];
+float f_value;  // 转换后的浮点数
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -92,25 +93,27 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_3);
-	HAL_UART_Receive_IT(&huart1,Rxdata,1);
-	
+//  HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_3);
+//	HAL_UART_Receive_IT(&huart1,Rxdata,1);
+	HAL_UART_Receive_IT(&huart2,Rx,sizeof(Rx));	     // 处理从另一块单片机来的信息
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		// 舵机（
-      __HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,50);
-   		HAL_Delay(1000);
-      __HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,250);
-   		HAL_Delay(1000);		
+//		// 舵机（
+//      __HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,50);
+//   		HAL_Delay(1000);
+//      __HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,250);
+//   		HAL_Delay(1000);		
 		
-//	  // 串口通讯
-//    HAL_UART_Transmit_IT(&huart1,Rxdata,1);
+	  // 串口通讯
+		
+
+    HAL_UART_Transmit(&huart1,Rx,sizeof(Rx),1000);  // 发送给电脑
 //    HAL_UART_Transmit_IT(&huart2,Rxdata,1);
-//		HAL_Delay(1000);
+		HAL_Delay(1000);
 		
     /* USER CODE END WHILE */
 
@@ -161,16 +164,21 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
-	if(huart == &huart1)
+//	if(huart == &huart2)
+//	{
+//		HAL_UART_Receive_IT(&huart2,Rxdata,1);
+//		if(Rxdata[0] == '1')
+//		{
+//			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);
+//		}else
+//		{
+//			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
+//		}
+//	}
+	if(huart == &huart2)	
 	{
-		HAL_UART_Receive_IT(&huart1,Rxdata,1);
-		if(Rxdata[0] == '1')
-		{
-			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);
-		}else
-		{
-			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
-		}
+		HAL_UART_Receive_IT(&huart2,Rx,sizeof(Rx));
+    memcpy(&f_value,Rx,sizeof(float));
 	}
 }
 /* USER CODE END 4 */

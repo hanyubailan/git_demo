@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,7 +44,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t Rxdata[1];
+//uint8_t Rxdata[1];
+float Tx = 3.12;     // 一个单精度浮点数为32位组成（二进制位）
+uint8_t Txdata[4];   // 储存转换为字节后的浮点数的数组
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -72,7 +74,7 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
+  
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
@@ -96,14 +98,19 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-   	HAL_UART_Receive(&huart1,Rxdata,1,HAL_MAX_DELAY);
-		if(Rxdata[0] == '1')
-		{
-			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);
-		}else
-		{
-			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
-		}
+//   	HAL_UART_Receive(&huart1,Rxdata,1,HAL_MAX_DELAY);
+//		if(Rxdata[0] == '1')
+//		{
+//			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);
+//		}else
+//		{
+//			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
+//		}
+		
+		memcpy(Txdata,&Tx,sizeof(float));
+		HAL_UART_Transmit(&huart1,Txdata,sizeof(Txdata),1000);
+		HAL_Delay(1000);
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -151,20 +158,20 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
-{
-	HAL_UART_Receive_IT(&huart1,Rxdata,1);
-	if(huart == &huart1)
-	{
-		if(Rxdata[0] == '1')
-		{
-			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);
-		}else
-		{
-			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
-		}
-	}
-}
+//void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+//{
+//	HAL_UART_Receive_IT(&huart1,Rxdata,1);
+//	if(huart == &huart1)
+//	{
+//		if(Rxdata[0] == '1')
+//		{
+//			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);
+//		}else
+//		{
+//			HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
+//		}
+//	}
+//}
 /* USER CODE END 4 */
 
 /**

@@ -28,3 +28,4 @@ tansmit\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 tansmit\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 tansmit\main.o: ../Core/Inc/usart.h
 tansmit\main.o: ../Core/Inc/gpio.h
+tansmit\main.o: D:\download_something\Keil\reality\MDK\core\ARM\ARMCC\Bin\..\include\string.h

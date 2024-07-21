@@ -31,3 +31,4 @@ homework\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 homework\main.o: ../Core/Inc/tim.h
 homework\main.o: ../Core/Inc/usart.h
 homework\main.o: ../Core/Inc/gpio.h
+homework\main.o: D:\download_something\Keil\reality\MDK\core\ARM\ARMCC\Bin\..\include\string.h
