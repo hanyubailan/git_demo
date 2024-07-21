@@ -45,7 +45,7 @@
 
 /* USER CODE BEGIN PV */
 //uint8_t Rxdata[1];
-float Tx = 3.12;     // 一个单精度浮点数为32位组成（二进制位）
+float Tx = 3.14f;     // 一个单精度浮点数为32位组成（二进制位）
 uint8_t Txdata[4];   // 储存转换为字节后的浮点数的数组
 /* USER CODE END PV */
 
