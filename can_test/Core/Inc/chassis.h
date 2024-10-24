@@ -1,0 +1,17 @@
+//#ifndef CHASSIS
+//#define CHASSIS
+
+//#define chassis_HW 100  // µ×ÅÌ°ë¿í
+//#define chassis_LH 100  // µ×ÅÌ°ë³¤
+
+//struct
+//{
+//	float A;
+//	float B;
+//	float C;
+//	float D;
+//}MotorTarget;
+
+//void Drive_Motor(float Vx, float Vy, float Vz);
+
+//#endif

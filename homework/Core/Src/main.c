@@ -111,10 +111,10 @@ int main(void)
 	  // 串口通讯
 		
 
-    HAL_UART_Transmit(&huart1,Rx,sizeof(Rx),1000);  // 发送给电脑
-//    HAL_UART_Transmit_IT(&huart2,Rxdata,1);
-		HAL_Delay(1000);
-		
+//    HAL_UART_Transmit(&huart1,Rx,sizeof(Rx),1000);  // 发送给电脑
+////    HAL_UART_Transmit_IT(&huart2,Rxdata,1);
+//		HAL_Delay(1000);
+		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
